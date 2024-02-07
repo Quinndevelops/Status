@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Request</title>
+<style>
+    body {
+        background-color: #121212;
+        color: #FFFFFF;
+        font-family: 'Helvetica', sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .box {
+        padding: 5px;
+        margin: 10px;
+        border: 2px solid transparent;
+        text-align: center;
+        font-weight: bold;
+        border-radius: 20px;
+        animation: rainbowBorder 2s linear infinite;
+    }
+    @keyframes rainbowBorder {
+        0% { border-color: #FF3B30; } /* Red */
+        14% { border-color: #FF9500; } /* Orange */
+        28% { border-color: #FFCC00; } /* Yellow */
+        42% { border-color: #4CD964; } /* Green */
+        56% { border-color: #5AC8FA; } /* Blue */
+        70% { border-color: #007AFF; } /* Light Blue */
+        84% { border-color: #5856D6; } /* Purple */
+        100% { border-color: #FF3B30; } /* Red */
+    }
+    .rainbowText {
+        background: linear-gradient(to right, #FF3B30, #FF9500, #FFCC00, #4CD964, #5AC8FA, #007AFF, #5856D6, #FF3B30);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: rainbowText 8s linear infinite;
+    }
+    @keyframes rainbowText {
+        0% { background-position: 0 0; }
+        600% { background-position: 600% 0; }
+    }
+    h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body onload="sendHello()">
+<input type="text" id="inputText" value="Hello" style="display: none;">
+<button onclick="sendRequest()" style="display: none;">Send</button>
+<h1 class="rainbowText">ECHO X Pro-Ai</h1>
+<div class="box">
+    <div id="outputText1" class="rainbowText">Checking Status</div>
+</div>
+<h1 class="rainbowText">Notes+</h1>
+<div class="box">
+    <div id="outputText2" class="rainbowText">Checking Status</div>
+</div>
+<h1 class="rainbowText">AtomMS v15.4</h1>
+<div class="box">
+    <div id="outputText3" class="rainbowText">Checking Status</div>
+</div>
+<h1 class="rainbowText">Infinity+</h1>
+<div class="box">
+    <div id="outputText4" class="rainbowText">Checking Status</div>
+</div>
+<h1 class="rainbowText">Inferno</h1>
+<div class="box">
+    <div id="outputText5" class="rainbowText">Checking Status</div>
+</div>
+
+<script>
+    function sendHello() {
+        const input = { "input": document.getElementById('inputText').value };
+        fetch('https://pro-ai.glitch.me/api-pro-chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(input)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Display the online message for each box with different delays
+                setTimeout(() => {
+                    document.getElementById('outputText1').textContent = 'Online';
+                    document.getElementById('outputText1').style.borderColor = 'transparent'; // Transparent border for success
+                }, 5000); // 1 second delay for the first box
+
+                setTimeout(() => {
+                    document.getElementById('outputText2').textContent = 'Online';
+                    document.getElementById('outputText2').style.borderColor = 'transparent'; // Transparent border for success
+                }, 7000); // 2 second delay for the second box
+
+                setTimeout(() => {
+                    document.getElementById('outputText3').textContent = 'Online';
+                    document.getElementById('outputText3').style.borderColor = 'transparent'; // Transparent border for success
+                }, 2000); // 3 second delay for the third box
+
+                setTimeout(() => {
+                    document.getElementById('outputText4').textContent = 'Online';
+                    document.getElementById('outputText4').style.borderColor = 'transparent'; // Transparent border for success
+                }, 6000); // 4 second delay for the fourth box
+
+                setTimeout(() => {
+                    document.getElementById('outputText5').textContent = 'Online';
+                    document.getElementById('outputText5').style.borderColor = 'transparent'; // Transparent border for success
+                }, 3000); // 5 second delay for the fifth box
+            })
+            .catch(error => {
+                var outputText = document.getElementById('outputText1');
+                outputText.textContent = 'Error Please Try Again Later';
+                outputText.style.borderColor = '#F00'; // Red border for error
+                console.error('Error:', error);
+            });
+    }
+</script>
+</body>
+</html>
